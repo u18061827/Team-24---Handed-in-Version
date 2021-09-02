@@ -1,0 +1,160 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Global element styles
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f4f9f4;
+}
+
+::selection {
+  background: #4db6ac;
+  color: white;
+}
+
+::-moz-selection {
+  background: #4db6ac;
+  color: white;
+}
+
+table {
+  width: 75vw;
+}
+
+th {
+  background-color: #4db6ac;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: #fff;
+}
+
+::ng-deep .table-helper-tooltip {
+  font-size: 15px;
+  white-space: pre-wrap;
+  color: white !important;
+  background-color: #4db6ac;
+  max-width: unset !important;
+ }
+
+::ng-deep .file-helper-tooltip {
+  font-size: 15px;
+  white-space: pre-wrap;
+  color: white !important;
+  background-color: #4db6ac;
+  max-width: unset !important;
+}
+
+mat-drawer-container {
+  height: 85vh;
+}
+
+// Global Variables
+
+$text-color: #fff;
+
+$shadow:
+0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+0 12.5px 10px rgba(0, 0, 0, 0.06),
+0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+0 100px 80px rgba(0, 0, 0, 0.12);
+
+
+// Global class styles
+
+.center-container{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.table-container {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-wrapper {
+  margin-bottom: 7%;
+  border-bottom: 5px solid transparent;
+    border-image: linear-gradient(to left, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+    border-image-slice: 1;
+}
+
+.table-helper {
+  color: #4db6ac;
+  font-size: 1.5em;
+  float: right;
+  padding-top: 1.25rem;
+  &:hover {
+    cursor: default;
+    opacity: 0.6;
+  }
+  white-space: pre-line;
+}
+
+
+.toolbar-item-spacer {
+  padding-right: 2%;
+}
+
+.update-table-button {
+  padding-left: 2.5%;
+  opacity: 0.6;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+
+.view-table-button {
+  opacity: 0.6;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+
+.page-title {
+  position: relative;
+  font-size: 2em;
+  font-weight: 500;
+  margin-top: 7%;
+  margin-left: 12.5%;
+}
+
+.w-100{
+  width: 200px;
+}
+
+.admin-form-container {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-content-wrapper {
+  background-color: #f3f9fb;
+  width: 75vw;
+  height: 60vh;
+  box-shadow: $shadow;
+  border-bottom: 5px solid transparent;
+    border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+    border-image-slice: 1;
+}
+
+.table-name-header {
+  font-size: 2.3em;
+  padding-top: 4%;
+  padding-bottom: 2%;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

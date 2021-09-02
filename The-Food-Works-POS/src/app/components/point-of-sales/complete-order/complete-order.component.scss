@@ -1,0 +1,131 @@
+@import '~src/styles.scss';
+
+// Home page styles
+.home-page-container {
+  height: 100vh;
+}
+
+// Toolbar
+mat-toolbar {
+  .application-name-text {
+    color: $text-color;
+    font-size: 1.7em;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      transition: 0.5s;
+      opacity: 0.6;
+    }
+  }
+  .home-toolbar-spacer {
+    flex: 1 1 auto;
+  }
+  .profile-icon {
+    color: $text-color;
+  }
+  img {
+    width: 2.3%;
+  }
+  button {
+    color: $text-color;
+  }
+}
+
+mat-horizontal-stepper {
+  height: 75vh;
+  button {
+    margin-top: 1.5rem;
+    margin-left: 0.5rem;
+  }
+}
+
+table {
+  width: 85%;
+}
+
+.bold {
+  font-weight: 500;
+  color: #4db6ac;
+  margin-left: 5px;
+}
+
+.example-card {
+  min-width: 15%;
+  border: 2px solid #4db6ac;
+}
+
+.form-content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepper-content-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1vh;
+  min-height: 43vh;
+  max-height: 43vh;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  img {
+    width: 50%;
+    border-radius: 20px;
+  }
+}
+
+.data-wrapper {
+  height: 3vh;
+  line-height: 1.5vh;
+}
+
+.test-container {
+  margin-top: 2em;
+  height: 40vh;
+  max-height: 40vh;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.confirm-table-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.order-details-container {
+  display: flex;
+  width: 99.85%;
+  flex-direction: row;
+  margin-top: 15px;
+  justify-content: space-evenly;
+  border-top: 2px solid #4db6ac;
+  border-right: 2px solid #4db6ac;
+  border-bottom: 2px solid #4db6ac;
+}
+
+.order-details-wrapper {
+  width: 100%;
+  border-left: 2px solid #4db6ac;
+}
+
+.complete-container {
+  display: flex;
+  justify-content: space-evenly;
+  button {
+    background-color: #c6f7f3;
+    width: 250px;
+    height: 150px;
+    margin-left: 1em;
+  }
+}
+

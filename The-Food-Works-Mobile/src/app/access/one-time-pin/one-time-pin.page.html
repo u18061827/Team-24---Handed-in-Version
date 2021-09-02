@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>one-time-pin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="otpForm">
+    <ion-item lines="none">
+      <ion-label color="tertiary">One Time Pin</ion-label>
+      <ion-input formControlName="OTP"></ion-input>
+    </ion-item>
+    <ion-button type="submit" [disabled]="!otpForm.valid" color="primary" (click)="checkOTP()">Submit</ion-button>
+  </form>
+</ion-content>

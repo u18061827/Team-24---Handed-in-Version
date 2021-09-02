@@ -1,0 +1,36 @@
+<div class="add-loyalty-dialog-container">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step>
+      <form [formGroup]="searchForm">
+        <ng-template matStepLabel>Choose Voucher Identification Method</ng-template>
+        <h1>Choose Voucher Identification Method</h1>
+        <div class="button-container">
+          <button mat-stroked-button class="identity-button" color="primary">QR Code</button>
+          <button mat-stroked-button class="identity-button" color="primary">Voucher Code</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Add Voucher Identifier</ng-template>
+      <form [formGroup]="searchForm">
+        <h1>Enter Voucher Code</h1>
+        <mat-form-field class="code-input">
+          <mat-label>Voucher Code</mat-label>
+          <input matInput #message maxlength="15" placeholder="EFC 1234 5678 9101">
+          <mat-hint align="start"><strong>Enter the 15 digit voucher code</strong> </mat-hint>
+          <mat-hint align="end">{{message.value.length}} / 15</mat-hint>
+        </mat-form-field>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Voucher Information</ng-template>
+      <form [formGroup]="searchForm">
+        <h1>Voucher: <strong>ECQ 7828 2712 3781</strong></h1>
+        <div class="voucher-container">
+          <h2>Discount Amount: <span>R300</span> | Amount Remaining: <span>R155</span></h2>
+          <button mat-stroked-button color="primary">Apply Voucher</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

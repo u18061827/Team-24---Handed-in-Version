@@ -1,0 +1,202 @@
+<div class="center-container">
+  <app-admin-navigation></app-admin-navigation>
+  <span class="page-title">Add Supplier</span>
+  <div class="admin-form-container">
+    <div class="form-content-wrapper">
+      <mat-horizontal-stepper linear #stepper class="add-supplier-stepper">
+        <!--Supplier Details-->
+        <mat-step [stepControl]="SupplierDetailsForm" [editable]="isEditable">
+          <form [formGroup]="SupplierDetailsForm">
+          <ng-template matStepLabel>Enter Supplier Details</ng-template>
+            <h4>Please enter the following details for the supplier:</h4>
+            <!--Type-->
+            <mat-form-field>
+              <mat-label>Choose a Supplier Type</mat-label>
+              <mat-select [ngModel]="selectedOption" [ngModelOptions]="{standalone: true}" (ngModelChange)="getTypeid($event)">
+                  <mat-option *ngFor="let item of typesData" #TypeSelect [value] = "item.SupplierTypeId">
+                    {{item.SupplierTypeName}}
+                  </mat-option>
+              </mat-select>
+              <mat-hint>Select the Product's Type above</mat-hint>
+              <mat-error>Please select a type</mat-error>
+            </mat-form-field>
+
+            <!--Order Method-->
+            <mat-form-field>
+              <mat-label>Choose an Order Method</mat-label>
+              <mat-select [ngModel]="selectedOptionMethod" [ngModelOptions]="{standalone: true}" (ngModelChange)="getMethodid($event)">
+                  <mat-option *ngFor="let item of methodsData" [value] = "item.OrderMethodId">
+                    {{item.OrderMethodName}}
+                  </mat-option>
+              </mat-select>
+              <mat-hint>Select the Order Method above</mat-hint>
+              <mat-error>Please select an order method</mat-error>
+            </mat-form-field>
+
+            <!--Name-->
+            <mat-form-field>
+              <mat-label>Supplier Name</mat-label>
+              <input formControlName="SupplierName" #SupplierNameInput matInput/>
+              <mat-hint>Please enter the supplier's name</mat-hint>
+              <mat-error>This field is required</mat-error>
+            </mat-form-field>
+            <br/>
+            <!--VAT-->
+            <mat-form-field>
+              <mat-label>Supplier VAT Number</mat-label>
+              <input maxLength="10" formControlName="SupplierVatNumber" #SupplierVatNumberInput matInput/>
+              <mat-hint>Please enter the supplier's VAT number</mat-hint>
+              <mat-error>Please enter 10 digits</mat-error>
+            </mat-form-field>
+
+            <!--Contact Number-->
+            <mat-form-field>
+              <mat-label>Supplier Contact Number</mat-label>
+              <input maxLength="10" formControlName="SupplierContactNumber" #SupplierContactNumberInput matInput/>
+              <mat-hint>Please enter the supplier's contact number</mat-hint>
+              <mat-error>Please enter 10 digits</mat-error>
+            </mat-form-field>
+
+            <!--Email Address-->
+            <mat-form-field>
+              <mat-label>Supplier Email Address</mat-label>
+              <input formControlName="SupplierEmailAddress" #SupplierEmailAddressInput matInput/>
+              <mat-hint>Please enter the supplier's email address</mat-hint>
+              <mat-error>Please enter a valid email address</mat-error>
+            </mat-form-field>
+            <br/>
+
+            <!--Order Days (onSelectionChange)="change($event)"-->
+            <mat-form-field>
+              <mat-select placeholder="Order Day" multiple>
+                <mat-option *ngFor="let day of alldays" [value]="day.SupplierOrderDayDescription" (onSelectionChange)="change($event)">{{day.SupplierOrderDayDescription}}</mat-option>
+              </mat-select>
+              <mat-hint>Please select the order days for this supplier</mat-hint>
+            </mat-form-field>
+            <br/>
+
+            <div  mat-dialog-actions align="end">
+              <button mat-stroked-button matStepperNext color="primary" [disabled]="!SupplierDetailsForm.valid">Next</button>
+            </div>
+
+          </form>
+        </mat-step>
+
+        <!--Address Form-->
+        <!-- Second step in stepper (Branch Address Form) -->
+        <mat-step [stepControl]="SupplierAddressForm" [editable]="isEditable">
+          <form [formGroup]="SupplierAddressForm">
+            <ng-template matStepLabel>Enter Supplier Address</ng-template>
+            <div>
+
+              <!--Word doc-->
+              <!--Supplier Address Building Number-->
+            <mat-form-field>
+              <mat-label>Supplier Address Building Number</mat-label>
+              <input matInput/>
+            </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Enter Supplier Address</mat-label>
+                <input matInput placeholder="Enter a location" formControlName="SupplierAddressFull" ngx-google-places-autocomplete #placesRef="ngx-places" [options]="addressOptions" (onAddressChange)="handleAddressChange($event)"/>
+                <mat-hint>Enter the address of the new supplier</mat-hint>
+                <mat-error>Please enter the new supplier's address</mat-error>
+              </mat-form-field>
+
+              <!-- Street Name (Autofilled) -->
+              <mat-form-field>
+                <mat-label>Street Name</mat-label>
+                <input matInput formControlName="SupplierAddressStreetName" readonly #branchStreetNameInput>
+                <mat-hint>The street name of the address selected</mat-hint>
+                <mat-error>Please enter the street name of the address specified</mat-error>
+              </mat-form-field>
+
+              <!-- Suburb (Autofilled) -->
+              <mat-form-field>
+                <mat-label>Suburb</mat-label>
+                <input matInput formControlName="SupplierAddressSuburb" readonly #SupplierAddressSuburbInput [(ngModel)]="suburb">
+                <mat-hint>The suburb of the address selected</mat-hint>
+                <mat-error>Please enter a valid suburb</mat-error>
+              </mat-form-field>
+
+              <!-- Supplier City (Autofilled) -->
+              <mat-form-field>
+                <mat-label>City / Town</mat-label>
+                <input matInput formControlName="SupplierAddressCity" readonly #SupplierCityInput [(ngModel)]="city">
+                <mat-hint>The city of the address selected</mat-hint>
+                <mat-error>Please enter a valid city</mat-error>
+              </mat-form-field>
+
+              <!-- Province (Autofilled) -->
+              <mat-form-field>
+                <mat-label>Province</mat-label>
+                <input matInput formControlName="SupplierAddressProvince" readonly #SupplierAddressProvinceInput [(ngModel)]="province">
+                <mat-hint>The province of the address selected</mat-hint>
+                <mat-error>Please enter the province of the address specified</mat-error>
+              </mat-form-field>
+
+              <!-- Country (Autofilled) -->
+              <mat-form-field>
+                <mat-label>Country</mat-label>
+                <input matInput formControlName="SupplierAddressCountry" readonly #SupplierAddressCountryInput [(ngModel)]="country">
+                <mat-hint>The country of the address selected</mat-hint>
+                <mat-error>Please enter the country of the address specified</mat-error>
+              </mat-form-field>
+
+               <!-- ZIP (Autofilled) -->
+              <mat-form-field>
+                <mat-label>ZIP</mat-label>
+                <input matInput formControlName="SupplierAddressZip" readonly #SupplierAddressZipInput [(ngModel)]="zip">
+                <mat-hint>The ZIP / Postal code of the address selected</mat-hint>
+                <mat-error>Please enter the ZIP / Postal code of the address specified</mat-error>
+              </mat-form-field>
+
+              <!-- Latitude (Autofilled and Hidden)-->
+              <input type="hidden" formControlName="SupplierAddressLat">
+
+              <!-- Longitude (Autofilled and Hidden)-->
+              <input type="hidden" formControlName="SupplierAddressLng">
+
+            </div>
+
+             <!-- Button to navigate to previous step in stepper -->
+            <div mat-dialog-actions align="end">
+              <!-- Button to navigate to next step in stepper (disabled until branch address form is valid)[disabled]="!SupplierAddressForm.valid" -->
+              <button mat-stroked-button matStepperNext color="primary" >Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Confirm Supplier Addition</ng-template>
+          <div class="new-branch-complete-container">
+            <h3><b>Supplier Details</b></h3>
+            <p>
+              Supplier Name: <span>{{SupplierNameInput.value}}</span><br>
+              Supplier VAT Number: <span>{{SupplierVatNumberInput.value}}</span><br>
+              Supplier Contact Number: <span>{{SupplierContactNumberInput.value}}</span><br>
+              Supplier Email Address: <span>{{SupplierEmailAddressInput.value}}</span><br>
+            </p>
+
+            <br/>
+            <h3><b>Supplier Address</b></h3>
+            <p>
+              Supplier Street Name: <span>{{streetAddress}}</span><br>
+              Supplier Suburb: <span>{{suburb}}</span><br>
+              Supplier City: <span>{{city}}</span><br>
+              Supplier Province: <span>{{province}}</span><br>
+              Supplier Country: <span>{{country}}</span><br>
+              Supplier ZIP: <span>{{zip}}</span><br>
+            </p>
+          </div>
+
+          <div mat-dialog-actions align="end">
+            <button mat-stroked-button style="margin-right: 10px" color="primary" type="submit" (click)="openDialog()">Confirm</button>
+          </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>
+
+<!---->

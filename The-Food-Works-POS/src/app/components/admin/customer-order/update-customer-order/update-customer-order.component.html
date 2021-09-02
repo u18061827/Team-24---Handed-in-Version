@@ -1,0 +1,37 @@
+      <form [formGroup]="form">
+        <div class="center">
+          <p class="page-title">Update Customer Order</p>
+          <br/><br/><br/>
+            <mat-form-field>
+                  <mat-label>Sale ID</mat-label>
+                  <input readonly matInput formControlName="SaleId">
+            </mat-form-field>
+            <br/>
+
+            <mat-form-field>
+                  <mat-label>Sale Date</mat-label>
+                  <input readonly matInput formControlName="DateofSale">
+            </mat-form-field>
+            <br/>
+
+            <mat-form-field>
+                <mat-label>Sale Status</mat-label>
+                <mat-select formControlName="SaleStatusDescription">
+                    <mat-option *ngFor="let item of statusData" [value] = "item.SaleStatusId">
+                    {{item.SaleStatusDescription}}
+                    </mat-option>
+                </mat-select>
+                <mat-hint>Select the new status here</mat-hint>
+            </mat-form-field>
+            <br/><br/>
+
+            <div class="button-row" mat-dialog-actions align="end" mat-dialog-actions>
+              <button id="confirmBtn" mat-raised-button color="primary" (click)="openModal()">Update</button>
+              <button id="cancelBtn" mat-raised-button (click)="onCancel()" >Cancel</button>
+            </div>
+        </div>
+      </form>
+
+      <br/><br/><br/><br/>
+
+

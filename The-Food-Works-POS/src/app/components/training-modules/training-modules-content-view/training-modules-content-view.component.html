@@ -1,0 +1,129 @@
+<!-- If In Complete Mode -->
+
+<div *ngIf="!viewMode">
+  <div class="module-content-container" *ngFor="let item of trainingModuleInfo">
+    <mat-tab-group animationDuration="2000ms" mat-align-tabs="center">
+      <mat-tab label="Module Introduction" #matgroup>
+        <div class="module-introduction-content">
+          <h1>{{item.ModuleName}}</h1>
+          <div class="module-introduction-text">
+            <p>
+              {{item.ModuleDescription}}
+            </p>
+            <div class="module-introduction-icons">
+              <mat-icon>schedule</mat-icon>{{item.ModuleDuration}} Minutes
+              <mat-icon class="content">subject</mat-icon>{{contentOrder}}
+              <mat-icon class="content">language</mat-icon>{{item.ModuleLanguage}}
+            </div>
+            <button mat-stroked-button color="primary" (click)='moveToSelectedTab("Learning Area")'>Begin</button>
+            <br>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Learning Area">
+        <div class="module-learning-area-content">
+          <mat-card [class.mat-elevation-z8]="isActive">
+            <div class="module-mat-card-content">
+              <iframe *ngIf="videoContent" [src]="safeSrc" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+              <div class="module-mat-card-content-info">
+                <div class="card-content-heading" *ngIf="textContent">
+                  <editor apiKey="opzrwvq9h9ygsak1k28bqeysq6x17taa2u46xxeilmm5ngac" initialValue={{item.ModuleContentText}} [init]="{
+                    min_height: 500,
+                    width: 1300
+                  }">
+                  </editor>
+                </div>
+                <div *ngIf="imageContent">
+                  <div class="card-content-image" *ngFor="let item of imageArray; let i = index">
+                    <mat-grid-list gutterSize="20px" cols="3" rowHeight="1.5:1" class="module-image-grid">
+                      <mat-grid-tile>
+                        <img src="{{item[i]}}" layout-fill>
+                      </mat-grid-tile>
+                    </mat-grid-list>
+                  </div>
+                </div>
+                <button mat-raised-button color="primary" (click)='openDialog()'
+                  class="button-module-finish">Finish</button>
+                <button mat-stroked-button color="primary" (click)='moveToSelectedTab("Module Introduction")'
+                  class="button-module-later">Complete Later</button>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </mat-tab>
+      <mat-tab label="Module Evaluation">
+        <div class="module-evaluation-content">
+          <div class="module-introduction-content">
+            <div>
+              <h1>Module Evaluation</h1>
+              <mat-list role="list">
+                <span>Date and Time Completed:</span>26 January 2021, 17:31<br><br><br>
+                <span>Time Elapsed:</span>23 Minutes 18 Seconds<br>
+                <button mat-stroked-button color="primary">Return</button>
+              </mat-list>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+
+<!-- If In View Mode-->
+
+<div *ngIf="viewMode">
+  <div class="module-content-container" *ngFor="let item of trainingModuleInfo">
+    <mat-tab-group animationDuration="2000ms" mat-align-tabs="center">
+      <mat-tab label="Module Introduction" #matgroup>
+        <div class="module-introduction-content">
+          <h1>{{item.ModuleName}} (View)</h1>
+          <div class="module-introduction-text">
+            <p>
+              {{item.ModuleDescription}}
+            </p>
+            <div class="module-introduction-icons">
+              <mat-icon>schedule</mat-icon>{{item.ModuleDuration}} Minutes
+              <mat-icon class="content">subject</mat-icon>{{contentOrder}}
+              <mat-icon class="content">language</mat-icon>{{item.ModuleLanguage}}
+            </div>
+            <mat-list role="list">
+              <span>Date and Time Completed:</span>{{item.DateCompleted}}<br><br><br>
+              <span>Time Elapsed:</span>{{item.TimeElapsed}}<br>
+            </mat-list>
+            <button mat-stroked-button color="primary" (click)='moveToSelectedTab("Learning Area")'>Next</button>
+            <br>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Learning Area">
+        <div class="module-learning-area-content">
+          <mat-card [class.mat-elevation-z8]="isActive">
+            <div class="module-mat-card-content">
+              <iframe *ngIf="videoContent" [src]="safeSrc" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+              <div class="module-mat-card-content-info">
+                <div class="card-content-heading" *ngIf="textContent">
+                  <editor apiKey="opzrwvq9h9ygsak1k28bqeysq6x17taa2u46xxeilmm5ngac" initialValue={{item.ModuleContentText}} [init]="{
+                      min_height: 500,
+                      width: 1300
+                    }">
+                  </editor>
+                </div>
+                <div *ngIf="imageContent">
+                  <div class="card-content-image" *ngFor="let item of imageArray; let i = index">
+                    <mat-grid-list gutterSize="20px" cols="3" rowHeight="1.5:1" class="module-image-grid">
+                      <mat-grid-tile>
+                        <img [src]="item[i]" alt="{{item[i]}}" layout-fill>
+                      </mat-grid-tile>
+                    </mat-grid-list>
+                  </div>
+                </div>
+                <button mat-stroked-button color="primary" (click)='moveToSelectedTab("Module Introduction")' class="button-module-later">Return</button>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="confirm-modal-container">
+  <h1 mat-dialog-title>Pending {{ paymentDetails.paymentType }} Payment</h1>
+  <div mat-dialog-content>
+    <p>{{ paymentDetails.paymentInstruction }}</p><br>
+    <p><span class="emphasis">{{ paymentDetails.amount | currency:'R ' }}</span></p><br>
+    <hr><br>
+    <p class="warning-message">
+       Only complete the sale once the customer has made the payment.
+    </p><br>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-stroked-button mat-dialog-close>Cancel Payment</button>
+    <button mat-stroked-button color="primary" mat-dialog-close [disabled]="btnEnabled">{{ btnTitle }}</button>
+  </div>
+</div>

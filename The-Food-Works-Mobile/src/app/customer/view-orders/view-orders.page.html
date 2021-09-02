@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Orders</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item lines="full">
+    <ion-label>Filter:</ion-label>
+    <ion-datetime [pickerOptions]="customPickerOptions" placeholder="Select Year" displayFormat="YYYY" min="2021" max="2050"></ion-datetime>
+  </ion-item>
+  <ion-card *ngIf="!isOrders">
+    <ion-item>
+      <ion-icon name="sad-outline" color="tertiary" slot="start"></ion-icon>
+      <ion-label color="tertiary">No Orders</ion-label>
+      <ion-button fill="outline" slot="end" [routerLink]="['/tabs']" routerDirection="forward">Shop</ion-button>
+    </ion-item>
+    <ion-card-content>
+      <h6>Once you make an order you will be able to view it here.</h6>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngFor="let order of orders">
+    <ion-item>
+      <ion-icon [name]="order.icon" [color]="order.color" slot="start"></ion-icon>
+      <ion-label [color]="order.color">{{ order.orderStatus }}</ion-label>
+      <ion-button fill="outline" slot="end" (click)="onClick(order.orderID)">View</ion-button>
+    </ion-item>
+    <ion-card-content>
+      <div class="order-content-wrapper">
+        <ion-thumbnail *ngFor="let item of order.orderLines">
+          <ion-img src="https://media.lacucinaitaliana.com/photos/5fe747a1e8ea64cd8a7372e6/1:1/pass/Lasagna%201.jpg"></ion-img>
+        </ion-thumbnail>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

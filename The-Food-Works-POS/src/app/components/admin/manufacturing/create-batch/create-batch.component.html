@@ -1,0 +1,111 @@
+<style>
+
+  button{
+    font-size:20;
+    margin-right: 30px;
+    display: in-line block;
+    text-align: center;
+    font-size: 15px;
+  }
+  table td, table th{
+    font-size:15px;
+  }
+</style>
+
+<div class="center-container">
+  <app-admin-navigation></app-admin-navigation>
+  <span class="page-title">Create a Batch</span>
+  <div class="admin-form-container">
+    <div class="form-content-wrapper">
+    <div *ngIf = "cookingList != null">
+       <label style = "margin-left:20px; margin-right:20px; font-size:20px;">Cooking List ID: {{cookingList.CookingListId}}</label><br><br>
+       <label style = "margin-left:20px; margin-right:20px; font-size:20px;">Date: {{cookingList.CookingListDate| date: 'dd/MM/y'}}</label>
+    </div>
+    <div *ngIf = "cookingListCreated != null">
+       <label [(ngModel)] = 'cookingListId'style = "margin-left:20px; margin-right:20px; font-size:20px;">Cooking List ID: {{cookingListCreated.cookingListId}}</label><br><br>
+       <label  style = "margin-left:20px; margin-right:20px; font-size:20px;">Date: {{cookingListCreated.cookingListDate| date: 'dd/MM/y'}}</label>
+    </div>
+       <!--Table-->
+
+
+
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+         <ng-container matColumnDef="productID">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.productId}} </td>
+        </ng-container>
+         
+         <ng-container matColumnDef="productBarcode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Barcode </th>
+          <td mat-cell *matCellDef="let element"> {{element.productBarcode}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="qtyOrdered">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Qty Ordered </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantityOrdered}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="qtyRequested">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Qty Requested – Moreletta</th>
+         <td mat-cell *matCellDef="let element"> {{element.quantityRequested}} </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="qtyOnHand">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Qty On Hand </th>
+         <td mat-cell *matCellDef="let element"> {{element.quantityOnHand}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="qtyStillNeeded">
+          <th mat-header-cell *matHeaderCellDef> Qty Still Needed </th>
+         <td mat-cell *matCellDef="let element"> {{element.quantitysStillNeeded}} </td>
+        </ng-container>
+
+       <ng-container matColumnDef="qtyToProduce">
+          <th mat-header-cell *matHeaderCellDef> Qty to Produce</th>
+         <td mat-cell *matCellDef="let element;let index = index"><input [(ngModel)] = "quantity[index]" type="number" placeholder="" > </td>
+        </ng-container>
+
+        <!--<ng-container matColumnDef="qtyOutstanding">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Qty Outstanding</th>
+         <td mat-cell *matCellDef="let element"> {{element.quantityOutstanding}} </td>
+        </ng-container>-->
+
+        <ng-container matColumnDef="addtoList">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+         <td mat-cell *matCellDef="let element;let index = index"> <button (click) = "addtoBatch(element, quantity[index])">Add to Batch</button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+      </table>
+    <br><br>
+    <div style= "float: left;width: 50%; margin-left: 20px;vertical-align: top;">
+      
+      <div *ngIf = "cookingList != null">
+       <button  mat-raised-button (click) = "writeBatch(cookingList.CookingListId)" >Submit</button>
+      </div>
+
+      <div *ngIf = "cookingListCreated != null">
+      <button  mat-raised-button (click) = "writeBatch(cookingListCreated.cookingListId)" >Submit</button>
+      </div>
+      
+      
+          <button  mat-raised-button routerLink="/admin">Cancel</button>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+

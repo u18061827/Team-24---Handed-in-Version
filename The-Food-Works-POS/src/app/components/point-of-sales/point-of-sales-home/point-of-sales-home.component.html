@@ -1,0 +1,259 @@
+<style>
+  .totals {
+    font-size: 30px;
+    margin-left: 30px;
+
+  }
+
+  button {
+    font-size: 15;
+    margin-right: 30px;
+    height: 100px;
+    width: 150px;
+    display: in-line block;
+    text-align: center;
+  }
+
+  table td,
+  table th {
+    font-size: 20px;
+  }
+
+  .selectList {
+    width: 50px;
+  }
+</style>
+
+
+<div class="home-page-container">
+  <mat-toolbar color="primary">
+    <img src="../../../../assets/images/logo.png" alt="GenPoint Logo">
+    <span class="application-name-text"><a>GenPoint</a></span>
+    <span class="home-toolbar-spacer"></span>
+    <mat-icon class="profile-icon">account_circle</mat-icon>
+    <button mat-button [matMenuTriggerFor]="account" class="menu-button">{{getUserName()}}<mat-icon>arrow_drop_down
+      </mat-icon></button>
+    <mat-menu #account="matMenu">
+      <button mat-menu-item>Account</button>
+      <button mat-menu-item routerlink="reset-password" (click)="redirect()">Reset Password</button>
+      <button mat-menu-item (click)="openModal()">Logout</button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <div style="margin-bottom: 20px;">
+    <span class="page-title" style="margin-top:10px; margin-left:20px">Make Sale</span>
+    <br><br>
+    <!--Main Meal Select-->
+    <div style="float:right; margin-right:20px; margin-bottom: 5px; vertical-align: top; width: 45%;">
+
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Main Meals
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div fxLayout="row wrap" fxLayoutGap="5px grid">
+            <div fxFlex="25%" *ngFor="let main of mainMeals">
+              <button id=main.ProductId mat-raised-button style="background-color: #ec7c88"
+                (click)="addSelectedProductToList(main.ProductBarcode)">{{main.ProductName}}</button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
+      <!--Side Select-->
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Sides
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div fxLayout="row wrap" fxLayoutGap="5px grid">
+            <div fxFlex="25%" *ngFor="let side of sides">
+              <button id=side.ProductId mat-raised-button style="background-color: #ec7c88"
+                (click)="addSelectedProductToList(side.ProductBarcode)">{{side.ProductName}}</button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <!--Dessert Select-->
+      <mat-accordion>
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Desserts
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div fxLayout="row wrap" fxLayoutGap="5px grid">
+            <div fxFlex="25%" *ngFor="let dessert of desserts">
+              <button id=dessert.ProductId mat-raised-button style="background-color: #ec7c88"
+                (click)="addSelectedProductToList(dessert.ProductBarcode)">{{dessert.ProductName}}</button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+
+    <!--Sale Line -->
+    <br>
+    <div>
+      <div style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">
+        <label style="margin-left:20px; margin-right:20px; font-size:20px;">Product Code</label>
+        <input [ngModel]="barcode" (ngModelChange)="addSelectedProductToList($event)"
+          style="margin-bottom:20px; height: 20px; width: 100px;" type="text" name="productID">
+      </div>
+
+
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"
+        style="float: left;width: 50%; margin-left: 20px">
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity. </th>
+          <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="lineTotal">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Line Total (Incl VAT)</th>
+          <td mat-cell *matCellDef="let element"> {{element.productPriceAmount}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef> Delete </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon (click)="deleteSaleLine(element.productBarcode)">delete</mat-icon>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+
+    <div class="totals" style="float: left;width: 50%; margin-left: 20px; margin-top:20px">
+      <strong><label>Sub Total: {{subTotal}}</label></strong><br><br>
+      <strong><label>Vat Total: {{vatTotal}}</label></strong><br><br>
+      <strong><label>Grand Total: {{grandTotal}}</label></strong><br><br>
+    </div>
+
+    <div style="float: left;width: 50%; margin-left: 20px;vertical-align: top;">
+      <button mat-raised-button style="background-color: #fdfd7c">Link Loyalty <br>Member</button>
+      <button mat-raised-button style="background-color: #fdfd7c">Add New <br>Loyalty Member</button>
+      <button mat-raised-button style="background-color: #fdfd7c">View Loyalty <br>Progress</button>
+
+      <br>
+      <br>
+    <br>
+    <br>
+    <button  mat-raised-button  style= "background-color: #c6f7f3" (click)="callPayment('card')">Card <br>Payment</button>
+    <button  mat-raised-button style= "background-color: #c6f7f3" (click)="callPayment('cash')">Cash <br>Payment</button>
+     <button mat-raised-button  style= "background-color: #c6f7f3">Voucher <br>Payment</button>
+    <br>
+    <br>
+    <button mat-raised-button style= "background-color: #c6f7f3" (click)="callPayment('combination')">Combination <br>Payment</button>
+    <button mat-raised-button style= "background-color: #c6f7f3" routerLink="/complete-order">Collect <br>Order</button>
+    <button mat-raised-button style= "background-color: #f2c6f7" routerLink="/search-sale">Search <br>Sale</button>
+    <button mat-raised-button style= "background-color: #f2c6f7" >Cash <br>Up</button>
+
+  </div>
+
+    <div style="float:left; margin-right:20px; vertical-align: top;">
+
+
+    </div>
+
+
+
+
+  </div>
+</div>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="admin-form-container" style="height: 30px; width: 30%;font-size:15; margin: 10px">
+  <div class="form-content-wrapper" style="height: 100px; width: 70%;font-size:15; margin: 10px">
+
+    <div style="text-align: center">
+      <div mat-dialog-content style="font-size:15; margin-right: 20px ">
+        <mat-label style="font-size:15px;margin-right: 10px; align:center; text-align: center;">Was the payment
+          successful?</mat-label>
+        <br><br>
+      </div>
+      <div mat-dialog-actions align="right">
+        <button mat-button style="font-size:15px; margin-right: 10px; height: 30px ;width:20px" mat-raised-button
+          color="primary">Yes</button>
+        <button mat-button style="font-size:15px; margin-right: 10px; height: 30px ;width:20px"
+          mat-raised-button>No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="admin-form-container" style="height: 30px; width: 30%;font-size:15; margin: 10px">
+  <div class="form-content-wrapper" style="height: 100px; width: 70%;font-size:15; margin: 10px">
+
+    <div style="text-align: center">
+      <div mat-dialog-content style="font-size:15; margin-right: 20px ">
+        <mat-label style="font-size:15px;margin-left: 10px; align:center; text-align: center;">Move to the next Sale?
+        </mat-label>
+        <br><br>
+      </div>
+      <div mat-dialog-actions align="right">
+        <button mat-button style="font-size:15px; margin-right: 10px; height: 30px ;width:20px" mat-raised-button
+          color="primary">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="admin-form-container" style="height: 30px; width: 30%;font-size:15; margin: 10px">
+  <div class="form-content-wrapper" style="height: 100px; width: 70%;font-size:15; margin: 10px">
+
+    <div style="text-align: center">
+      <div mat-dialog-content style="font-size:15; margin-right: 20px ">
+        <mat-label style="font-size:15px;margin-left: 10px; align:center; text-align: center;">The Cash Up was
+          Successful.</mat-label>
+        <br><br>
+      </div>
+      <div mat-dialog-actions align="right">
+        <button mat-button style="font-size:15px; margin-right: 10px; height: 30px ;width:20px" mat-raised-button
+          color="primary">Close</button>
+      </div>
+    </div>
+  </div>
+</div><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="admin-form-container" style="height: 30px; width: 30%;font-size:15; margin: 10px">
+  <div class="form-content-wrapper" style="height: 100px; width: 70%;font-size:15; margin: 10px">
+
+    <div style="text-align: center">
+      <div mat-dialog-content style="font-size:15; margin-right: 20px ">
+        <mat-label style="font-size:15px;margin-left: 10px; align:center; text-align: center;">The Cash Up was
+          unsuccessful</mat-label>
+        <br><br>
+      </div>
+      <div mat-dialog-actions align="right">
+        <button mat-button style="font-size:15px; margin-right: 10px; height: 30px ;width:20px" mat-raised-button
+          color="primary">Retry</button>
+      </div>
+    </div>
+  </div>
+</div><br><br><br><br><br><br><br><br>
+
+<app-search-sale></app-search-sale><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<app-cash-up></app-cash-up>

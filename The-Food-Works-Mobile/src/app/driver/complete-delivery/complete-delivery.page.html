@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Complete Delivery</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" color="primary"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="container">
+    <div class="info-wrapper">
+      <ng-container *ngIf="completeInfo">
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            Sale ID:
+          </ion-col>
+          <ion-col>
+            {{ completeInfo.saleID }}
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            Customer:
+          </ion-col>
+          <ion-col>
+            {{ completeInfo.customerFullName }}
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            Contact:
+          </ion-col>
+          <ion-col>
+            {{ completeInfo.customerTelephone }}
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </div>
+    <div class="signature-wrapper">
+      <div class="signature-container">
+        <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+      </div>
+      <ion-button color="primary" (click)="clearSignature()" [disabled]="!hasSign" expand="block">Clear</ion-button>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="buttons-wrapper">
+      <ion-button color="success" (click)="savePad()" [disabled]="!hasSign">Complete</ion-button>
+      <ion-button color="danger" (click)="doReturn()">Return</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

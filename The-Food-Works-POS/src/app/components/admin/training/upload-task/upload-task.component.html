@@ -1,0 +1,13 @@
+<div style="margin-left: 2%; margin-top: 5%;">
+  <div *ngIf="percentage | async as pct">
+    <mat-progress-bar
+      class="example-margin"
+      [color]="color"
+      [mode]="mode"
+      [value]="pct"
+      max="100">
+    </mat-progress-bar>
+  </div>
+</div>
+
+

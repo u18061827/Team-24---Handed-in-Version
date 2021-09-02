@@ -1,0 +1,44 @@
+    <div class="form-content-wrapper" style= "padding-left: 5px; font-size:15px">
+          <div class="page-title">Receive Supplier Order</div>
+          <br/><br/><br/><br/>
+          <div class="form">
+          <form [formGroup]="form">
+
+            <br/><br/>
+
+            <mat-form-field>
+              <mat-label>Order Number</mat-label>
+              <input readonly matInput formControlName="SupplierOrderId">
+            </mat-form-field>
+              <br/>
+              <br/>
+            <section class="indent-1">
+                <!-- Section 1 *" {{names}}-->
+                <section class="left">
+                  <mat-form-field>
+                    <mat-select placeholder="Ingredients Received" [(value)]="selectedIngredients" multiple>
+                      <mat-option *ngFor="let ingredient of ingredientList" [value]="ingredient.ProductId" (onSelectionChange)="change($event)">{{ingredient.ProductName}}</mat-option>
+                    </mat-select>
+                    <mat-hint>Please select the ingredients received</mat-hint>
+                  </mat-form-field>
+                </section>
+
+                <!-- <section class="right">
+                  <button class="image-upload-button" mat-stroked-button (click)="fileUploader.click()" color="primary">Upload Invoice Image</button>
+                  <label for="fileUploader" id="file"></label>
+                  <input type="file" accept="image/*" #fileUploader id="fileUploader" (change)="getImageFile($event)" style="display: none;">
+                  <input type="hidden" formControlName="InvoiceImage" />
+                </section> -->
+            </section>
+
+
+           <br/>
+
+            <div class="button-row" mat-dialog-actions align="end">
+              <button style= "font-size:15px; margin-right: 10px" [disabled]="!form.valid" mat-raised-button color="primary" (click)="openDialog()" type="submit">Receive Order</button>
+              <button style= "font-size:15px; margin-right: 30px" mat-raised-button (click)="onCancel()">Cancel</button>
+            </div>
+      </form>
+      </div>
+  </div>
+

@@ -1,0 +1,31 @@
+<div class="form-content-wrapper">
+    <p class="page-title">Place Supplier Order</p>
+    <br/><br/><br/>
+    <form  [formGroup]="form">
+      <div><h3>Please select the following ingredients to be ordered from:
+        <b><input matInput readonly formControlName="SupplierName" /></b></h3>
+      </div>
+
+      <input type="hidden" formControlName="SupplierVatNumber" />
+      <!--Products-->
+      <div>
+          <section class="indent-1">
+              <!-- Section 1 *" {{names}}-->
+            <section class="example-section">
+              <mat-form-field>
+                <mat-select placeholder="Ingredients To Order" [(value)]="selectedIngredients" multiple>
+                  <mat-option *ngFor="let ingredient of ingredientList" [value]="ingredient.ProductId" (onSelectionChange)="change($event)">{{ingredient.ProductName}}</mat-option>
+                </mat-select>
+                <mat-hint>Please select the ingredients you would like to order</mat-hint>
+              </mat-form-field>
+            </section>
+          </section>
+      </div>
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      <div class="button-row" mat-dialog-actions align="end">
+        <button style= "font-size:15px; margin-right: 10px;" mat-raised-button color="primary" (click)="openDialog()">Place Order</button>
+        <button style= "font-size:15px; margin-right: 30px"(click)="onCancel()" mat-raised-button >Cancel</button>
+      </div>
+  </form>
+
+</div>

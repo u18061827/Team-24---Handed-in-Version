@@ -1,0 +1,15 @@
+.container {
+  height: 100%;
+}
+
+.footer-container {
+  position: relative;
+  bottom: -340px;
+  margin: auto;
+  width: 80vw;
+  text-align: center;
+  p {
+    font-size: x-small;
+    opacity: 0.6;
+  }
+}

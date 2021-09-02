@@ -1,0 +1,147 @@
+<style>
+  mat-form-field{
+      padding-left: 20px
+  }
+  </style>
+
+  <div class="center-container">
+  
+    
+    <div class="admin-form-container">
+      <div class="form-content-wrapper">
+<span class="page-title">Update Employee</span>  
+  <br>
+  <br>
+  <br>
+        <form [formGroup] = "form" margin ="10px" >
+        <!--Name-->
+          <div>
+           <mat-form-field>
+              <input formControlName ="name" matInput placeholder ="First Name*">
+             <!--<mat-hint>Enter First Name</mat-hint>-->
+              <mat-error>This Field is required</mat-error>
+          </mat-form-field>
+          <!--Surname-->
+          <mat-form-field>
+              <input formControlName ="surname" matInput placeholder ="Last Name*">
+              <!-- <mat-hint>Enter Last Name</mat-hint>-->
+              <mat-error>This Field is required</mat-error>
+          </mat-form-field>
+          <!--ID-->
+          <mat-form-field>
+              <input readonly formControlName ="IDNumber" matInput placeholder ="ID Number*">
+              <!-- <mat-hint></mat-hint>-->
+              <mat-error>This Field is required</mat-error>
+          </mat-form-field>
+          </div>
+          <br>
+          <div>
+          <!--Telephone-->
+          <mat-form-field>
+              <input formControlName ="telephone" matInput placeholder ="Telephone Number*">
+             <!-- <mat-hint></mat-hint>-->
+              <mat-error>This Field is required</mat-error>
+          </mat-form-field>
+          <!--Email-->
+          <mat-form-field>
+              <input formControlName ="email" matInput placeholder ="Email*">
+              <!-- <mat-hint></mat-hint>-->
+              <mat-error>Invalid Email Address</mat-error>
+          </mat-form-field>
+          <!--Branch-->
+          <mat-form-field style="margin-right:163px">
+          <mat-label>Branch</mat-label>
+            <mat-select formControlName = "branch">
+                      <mat-option *ngFor = "let branch of branches" [value]="branch.BranchId">{{branch.BranchName}}</mat-option>
+            </mat-select>
+            <mat-hint>Please select a branch</mat-hint>
+            <mat-error>This Field is required</mat-error>
+           </mat-form-field>
+           </div>
+          <br>
+          <div>
+          <!--user role-->
+          <mat-form-field style="margin-right:163px">
+          <mat-label>User Role</mat-label>
+            <mat-select formControlName = "userRole">
+                       <mat-option *ngFor = "let role of userRoles" [value]="role.UserRoleId">{{role.UserRoleName}}</mat-option>
+            </mat-select >
+            <mat-hint>Select a Branch</mat-hint>
+            <mat-error>This Field is required</mat-error>
+        </mat-form-field>
+
+        <!--user status-->
+          <mat-form-field style="margin-right:163px">
+          <mat-label>User Status</mat-label>
+            <mat-select formControlName = "userStatus">
+                       <mat-option *ngFor = "let role of userStatus" [value]="role.UserStatusId">{{role.UserDescription}}</mat-option>
+            </mat-select >
+            <mat-hint>Select a User Status</mat-hint>
+            <mat-error>This Field is required</mat-error>
+        </mat-form-field>
+        </div>
+
+          <div class = "button" align = "right">
+          <button style= "font-size:15; margin-right: 10px" mat-raised-button color="primary" (click)="openModal()" [disabled]="!form.valid">Submit</button>
+          <button style= "font-size:15; margin-right: 10px" mat-raised-button  mat-dialog-close >Cancel</button>
+          </div>
+
+      </form>
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="admin-form-container" style = "height: 30px; width: 30%;font-size:15; margin: 10px">
+      <div class="form-content-wrapper" style = "height: 100px; width: 70%;font-size:15; margin: 10px">
+
+  <div>
+  <div mat-dialog-content style= "font-size:15; margin-right: 20px ">
+      <mat-label style = "margin-right: 10px; align:center; text-align: center;">Are you sure you want to update your details?</mat-label>
+
+  </div >
+  <div mat-dialog-actions align= "right">
+    <button mat-button style= "font-size:15; margin-right: 10px" mat-raised-button color="primary" >Yes</button>
+    <button mat-button style= "font-size:15; margin-right: 10px" mat-raised-button >No</button>
+  </div>
+  </div>
+  </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="admin-form-container" style = "height: 30px; width: 30%;font-size:15; margin: 10px">
+      <div class="form-content-wrapper" style = "height: 100px; width: 70%;font-size:15; margin: 10px">
+
+  <div>
+  <div mat-dialog-content style= "font-size:15; margin-right: 20px ">
+      <mat-label style = "margin-right: 10px; align:center; text-align: center;">The Employee’s details have been successfully updated</mat-label>
+
+  </div >
+  <div mat-dialog-actions align= "right">
+    <button mat-button style= "font-size:15; margin-right: 10px" mat-raised-button color="primary" >Close</button>
+
+  </div>
+  </div>
+  </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>

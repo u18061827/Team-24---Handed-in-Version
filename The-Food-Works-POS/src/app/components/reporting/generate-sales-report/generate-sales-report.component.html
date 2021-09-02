@@ -1,0 +1,159 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<mat-toolbar color="primary">
+  <img src="../../../../assets/images/logo.png" alt="GenPoint Logo">
+  <span class="application-name-text" routerLink="/home"><a>GenPoint</a></span>
+  <span class="home-toolbar-spacer"></span>
+  <mat-icon class="profile-icon">account_circle</mat-icon>
+  <button mat-button [matMenuTriggerFor]="account" class="menu-button">
+    <mat-icon>arrow_drop_down
+    </mat-icon>
+  </button>
+  <mat-menu #account="matMenu">
+    <button mat-menu-item>Account</button>
+    <button mat-menu-item routerlink="/reset-password">Reset Password</button>
+    <button mat-menu-item (click)="openModal()">Logout</button>
+  </mat-menu>
+</mat-toolbar>
+<div class="wrapper">
+  <div class="sidenav">
+    <h2>Report Parameters</h2>
+    <hr>
+    <form [formGroup]="filterForm">
+      <h4>Year</h4>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Year</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="endDate" class="form-control">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <br>
+      <h4>Branch</h4>
+      <mat-form-field appearance="fill">
+        <mat-label>Branch</mat-label>
+        <mat-select formControlName="BranchId">
+          <mat-option *ngFor="let item of categoryData" [value]="item.BranchId">
+            {{item.BranchName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <hr><br>
+      <button class="button" style="background-color: powderblue;" type="submit"
+        (click)="generateReport(filterForm.value)">Generate Report</button><br><br>
+      <button class="button" style="background-color: pink;" (click)="openPDF()">Download Report PDF</button>
+    </form>
+  </div>
+
+  <br>
+  <div *ngIf="created" style="width:70%; left:200px;" id="content">
+    <table>
+      <tr style="border: none;">
+        <th class="header"></th>
+        <th class="center-head"></th>
+        <th class="right-head"></th>
+      </tr>
+      <tr>
+        <td>
+          <h3>Report Date: {{ this.reportParams.endDate | date: 'dd/MM/y'}}</h3>
+          <h3>Selected Branch: {{this.branchName}}</h3>
+        </td>
+        <td><img class="img-header" src="../../../../assets/images/Food works.jpg"></td>
+        <td>
+          <h3>Date Range</h3>
+          <h3>Selected Year: {{reportParams.endDate | date: 'dd/MM/y'}}</h3>
+        </td>
+      </tr>
+    </table>
+    <hr class="hr-header">
+    <h1 class="h1-header">Sales Report</h1>
+    <hr>
+    <h2 style="text-align: center;">Daily Sales</h2>
+    <table id=daily-sales-table style="width: 70%; font-size:small;">
+      <tr>
+        <th rowspan="2">Month</th>
+        <th colspan="31">Day</th>
+      </tr>
+      <tr id="header">
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        <td>14</td>
+        <td>15</td>
+        <td>16</td>
+        <td>17</td>
+        <td>18</td>
+        <td>19</td>
+        <td>20</td>
+        <td>21</td>
+        <td>22</td>
+        <td>23</td>
+        <td>24</td>
+        <td>25</td>
+        <td>26</td>
+        <td>27</td>
+        <td>28</td>
+        <td>29</td>
+        <td>30</td>
+        <td>31</td>
+      </tr>
+      <tr *ngFor="let item of tableData;">
+        <td>{{item.Month}}</td>
+        <td>{{item[1]}}</td>
+        <td>{{item[2]}}</td>
+        <td>{{item[3]}}</td>
+        <td>{{item[4]}}</td>
+        <td>{{item[5]}}</td>
+        <td>{{item[6]}}</td>
+        <td>{{item[7]}}</td>
+        <td>{{item[8]}}</td>
+        <td>{{item[9]}}</td>
+        <td>{{item[10]}}</td>
+        <td>{{item[11]}}</td>
+        <td>{{item[12]}}</td>
+        <td>{{item[13]}}</td>
+        <td>{{item[14]}}</td>
+        <td>{{item[15]}}</td>
+        <td>{{item[16]}}</td>
+        <td>{{item[17]}}</td>
+        <td>{{item[18]}}</td>
+        <td>{{item[19]}}</td>
+        <td>{{item[20]}}</td>
+        <td>{{item[21]}}</td>
+        <td>{{item[22]}}</td>
+        <td>{{item[23]}}</td>
+        <td>{{item[24]}}</td>
+        <td>{{item[25]}}</td>
+        <td>{{item[26]}}</td>
+        <td>{{item[27]}}</td>
+        <td>{{item[28]}}</td>
+        <td>{{item[29]}}</td>
+        <td>{{item[30]}}</td>
+        <td>{{item[31]}}</td>
+    </table>
+    <br>
+    <h2 style="text-align: center;">Accumulated Sales</h2>
+    <div class="chart-wrapper" id="htmlData">
+      <canvas height="24" width="70" baseChart [datasets]="barChartData" [labels]="barChartLabels"
+        [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
+      </canvas>
+      <h2 class="center-head">** END OF REPORT **</h2>
+      <hr>
+      <div class="left-footer">
+        <h4>Generated by: </h4><img class="img-footer" src="../../../../assets/images/LOGO 2 FINAL.JPG">
+      </div>
+      <div class="right-footer">
+        <h4>Page 1 of 1</h4>
+      </div>
+    </div>
+  </div>

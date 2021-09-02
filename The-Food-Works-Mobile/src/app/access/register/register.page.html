@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Account</ion-title>
+    <ion-buttons slot="start" >
+      <ion-back-button defaultHref="/" color="primary"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <form [formGroup]="registerForm">
+      <ion-item lines="full">
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input formControlName="CustomerName"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">Surname</ion-label>
+        <ion-input formControlName="CustomerSurname"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>Date of Birth</ion-label>
+        <ion-datetime value="1999-02-19" placeholder="Select Date" formControlName="CustomerDob"></ion-datetime>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">Telephone Number</ion-label>
+        <ion-input formControlName="CustomerTelephone"></ion-input>
+      </ion-item>
+      <!-- <ion-item lines="full">
+        <ion-label position="stacked">Address</ion-label>
+        <ion-input formControlName="Address" placeholder="Enter a location" ngx-google-places-autocomplete #placesRef="ngx-places" [options]="addressOptions" (onAddressChange)="handleAddressChange($event)"></ion-input>
+      </ion-item> -->
+      <ion-item lines="full">
+        <ion-label position="stacked">Street Number</ion-label>
+        <ion-input formControlName="StreetNumber"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">Street Name</ion-label>
+        <ion-input formControlName="StreetName"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">City/Town</ion-label>
+        <ion-input formControlName="City"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">Province</ion-label>
+        <ion-input formControlName="Province"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">Postal Code</ion-label>
+        <ion-input formControlName="PostalCode"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">Latitude</ion-label>
+        <ion-input formControlName="Lat"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">Longitude</ion-label>
+        <ion-input formControlName="Lng"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input formControlName="CustomerEmail"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input type="password" formControlName="Password"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">Confirm Password</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="stacked">Join Loyalty Program</ion-label>
+        <ion-checkbox color="primary" formControlName="IsLoyaltyProgram"></ion-checkbox>
+      </ion-item>
+      <div class="button-wrapper">
+        <ion-button color="success" (click)="presentConfirm()" expand="block" [disabled]="!registerForm.valid">Submit</ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

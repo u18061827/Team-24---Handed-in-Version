@@ -1,0 +1,16 @@
+<div class="confirm-modal-container">
+  <h1 mat-dialog-title>Enter Email</h1>
+  <div mat-dialog-content>
+    <div style= "margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">
+    <label style = "margin-left:20px; margin-right:20px; font-size:20px;">Email Address: </label>
+    <input  [(ngModel)]="EmailAddress" style = "margin-bottom:20px; height: 20px; width: 100px;" type = "text" name ="emailAddress">
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-stroked-button mat-dialog-close color="primary" (click)="onConfirm(EmailAddress)">Submit</button>
+    <button mat-stroked-button mat-dialog-close (click)="onCancel()">Cancel</button>
+  </div>
+</div>
+ 
+ 
+ 

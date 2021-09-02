@@ -1,0 +1,30 @@
+.add-loyalty-dialog-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 50vw;
+  mat-horizontal-stepper {
+    width: 45vw;
+    height: 45vh;
+    h1 {
+      color: #4DB6AC;
+      font-weight: 500;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1%;
+      border-bottom: 3px solid #4DB6AC;
+      padding-bottom: 10em;
+      padding-top: 5em;
+    }
+    table {
+      width: 40vw;
+      height: 10vh;
+    }
+  }
+}

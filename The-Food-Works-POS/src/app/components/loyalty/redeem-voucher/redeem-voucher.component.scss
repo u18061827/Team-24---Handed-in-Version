@@ -1,0 +1,62 @@
+.add-loyalty-dialog-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 50vw;
+  mat-horizontal-stepper {
+    width: 45vw;
+    height: 45vh;
+    h1 {
+      color: #4DB6AC;
+      font-weight: 500;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1%;
+      border-bottom: 3px solid #4DB6AC;
+      padding-bottom: 5em;
+      padding-top: 5em;
+    }
+    .code-input {
+      margin: 3%;
+      width: 20vw;
+    }
+    table {
+      width: 40vw;
+      height: 10vh;
+    }
+    .voucher-container {
+      width: 30vw;
+      height: 10vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: -5%;
+      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+      span {
+        color: #4DB6AC;
+      }
+      button {
+        margin-top: 3%;
+      }
+    }
+    .button-container {
+      width: 20vw;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      .identity-button {
+        margin-top: 30%;
+        margin: 10%;
+        width: 60%;
+      }
+    }
+  }
+}

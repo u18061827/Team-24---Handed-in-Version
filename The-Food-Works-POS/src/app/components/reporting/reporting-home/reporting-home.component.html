@@ -1,0 +1,30 @@
+<div class="home-page-container">
+    <mat-toolbar color="primary">
+        <img src="../../../../assets/images/logo.png" alt="GenPoint Logo">
+        <span class="application-name-text" routerLink="/home"><a>GenPoint</a></span>
+        <span class="home-toolbar-spacer"></span>
+        <mat-icon class="profile-icon">account_circle</mat-icon>
+        <button mat-button [matMenuTriggerFor]="account" class="menu-button">{{getUserName()}}
+            <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #account="matMenu">
+            <button mat-menu-item>Account</button>
+            <button mat-menu-item routerlink="reset-password" (click)="redirect()">Reset Password</button>
+            <button mat-menu-item (click)="openModal()">Logout</button>
+        </mat-menu>
+    </mat-toolbar>
+    <div class="selectors-container">
+        <div class="selector">
+            <button mat-flat-button routerLink="/report-sales">Generate Sales Report</button>
+        </div>
+        <div class="selector">
+            <button mat-flat-button routerLink="/report-stock">Generate Stock Report</button>
+        </div>
+        <div class="selector" style="width: max-content;">
+            <button mat-flat-button routerLink="/report-product-trends">Generate Product Trends Report</button>
+        </div>
+        <div class="selector">
+            <button mat-flat-button routerLink="/report-branch">Generate Branch Report</button>
+        </div>
+    </div>
+</div>

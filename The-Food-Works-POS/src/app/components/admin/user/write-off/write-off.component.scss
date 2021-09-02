@@ -1,0 +1,14 @@
+@import "~src/styles.scss";
+
+#write-off-table td,
+th {
+  border: 0.0002px dotted #4db6ac;
+  padding: 2px;
+  border-collapse: collapse;
+}
+
+.table-head {
+  text-align: center;
+  background-color: black;
+  color: white;
+}

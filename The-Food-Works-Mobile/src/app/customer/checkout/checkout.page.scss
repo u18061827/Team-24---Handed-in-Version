@@ -1,0 +1,49 @@
+form {
+  margin-top: 1em;
+}
+
+ion-button {
+  margin-top: 1.5em;
+}
+
+a {
+  margin: 1em;
+}
+
+.checkout-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-content-wrapper {
+  height: 55vh;
+  width: 90vw;
+  border: 2px dashed #71c9ce;
+  border-radius: 20px;
+  padding: 0.5em;
+}
+
+.checkout-list-wrapper {
+  min-height: 42.5vh;
+  max-height: 42.5vh;
+  overflow: auto;
+}
+
+.total-info-container {
+  background-color: #71c9ce;
+  border-radius: 20px;
+  color: white;
+  margin-top: 1em;
+}
+
+.total-info-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.checkout-button-container {
+  display: flex;
+  align-items: center;
+}

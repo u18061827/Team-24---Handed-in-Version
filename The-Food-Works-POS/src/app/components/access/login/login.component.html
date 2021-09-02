@@ -1,0 +1,41 @@
+<div class="login-box-container">
+  <div class="login-box-wrapper">
+    <div class="login-image-wrapper">
+      <img src="../../../../assets/images/logo.png">
+    </div>
+    <div class="login-content-wrapper">
+      <h1>Welcome Back</h1>
+      <form [formGroup]="loginGroup">
+        <mat-form-field appearance="outline">
+          <mat-label>Email Address</mat-label>
+          <input type="email" matInput placeholder="Email Address" formControlName="EmailAddress">
+          <mat-hint>Your email address</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput placeholder="Password" formControlName="Password">
+          <mat-hint>Your password</mat-hint>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-label>Branch</mat-label>
+          <mat-select [(value)]="branchDropdown.BranchId" formControlName="BranchId">
+            <mat-option *ngFor="let item of selectionData" [value]="item.BranchId">
+              {{item.BranchName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        </form>
+        <!--<mat-label style="color: red;">Invalid Login Credentials!</mat-label><br>
+        <button mat-raised-button routerLink="/home">LOGIN</button>-->
+        <button mat-raised-button color="primary" [disabled] = "!loginGroup.valid" (click)="Login()">Login</button>
+    </div>
+    <div class="access-content">
+      <h2> New to The Food Works?</h2>
+      <a routerLink="/user/add-user">Register</a>
+      <br>
+      <a routerLink="/forgot-password">Forgot Password?</a>
+    </div>
+  </div>
+</div>

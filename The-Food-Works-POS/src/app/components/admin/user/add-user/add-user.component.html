@@ -1,0 +1,25 @@
+
+<div class="modal-content">
+  <div class="modal-header">
+    <h3>Add User Role</h3>
+  </div>
+  <div class="modal-body">
+        <form [formGroup]="addUserRoleForm">
+          <div class="row justify-content-center">
+            <div class="col-md-8 keyword">
+              <mat-form-field appearance="legacy">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name">
+              </mat-form-field>
+              <br>
+              <mat-form-field appearance="legacy">
+                <mat-label>Description</mat-label>
+                <input matInput type="text" formControlName="description">
+              </mat-form-field>
+              <br>
+              <button mat-raised-button (click)="openModal()">Add</button>
+            </div>
+          </div>
+        </form>
+      </div>
+</div>

@@ -1,0 +1,43 @@
+ion-content {
+  color: #71c9ce;
+}
+
+.product-image-wrapper {
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 0%, transparent 100%);
+}
+
+.product-name {
+  position: absolute;
+  top: 42%;
+  left: 4%;
+  h1 {
+    margin-bottom: -15px;
+  }
+  ion-icon {
+    color: #71c9ce;
+  }
+}
+
+.product-description {
+  border-top: 5px solid #71c9ce;
+  padding: 0 1em;
+  h6 {
+    font-weight: 600;
+  }
+}
+
+.product-ingredients {
+  color: #71c9ce;
+}
+
+ion-footer {
+  border: none;
+  text-align: center;
+  ion-button {
+    width: 60%;
+    margin: 0.5em 0;
+    span {
+      margin-left: 0.3em;
+    }
+  }
+}

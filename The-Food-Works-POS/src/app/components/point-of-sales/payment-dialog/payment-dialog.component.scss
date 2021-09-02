@@ -1,0 +1,23 @@
+hr {
+  color: #4db6ac;
+}
+
+.confirm-modal-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  .mat-dialog-content {
+    text-align: center;
+    align-self: center;
+  }
+}
+
+.warning-message {
+  color: #D83A56;
+}
+
+.emphasis {
+  font-size: 2em;
+  font-weight: 600;
+}

@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Account
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-list lines="full">
+      <ion-item [routerLink]="['/update-customer']" routerDirection="forward">
+        <ion-label>
+          <h2>Account</h2>
+          <p>View your account details</p>
+        </ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/view-orders']" routerDirection="forward">
+        <ion-label>
+          <h2>Orders</h2>
+          <p>View your order history</p>
+        </ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/rewards-page']" routerDirection="forward">
+        <ion-label>
+          <h2>Rewards</h2>
+          <p>View your loyalty rewards</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <div class="footer-container">
+      <ion-button expand="block" (click)="doLogout()">Logout</ion-button>
+      <p>Version 1.1</p>
+    </div>
+  </div>
+</ion-content>
+

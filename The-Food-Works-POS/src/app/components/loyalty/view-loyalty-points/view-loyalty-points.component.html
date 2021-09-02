@@ -1,0 +1,113 @@
+<div class="add-loyalty-dialog-container">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step>
+      <form [formGroup]="searchForm">
+        <ng-template matStepLabel>Search Customer</ng-template>
+        <h1>Search Customer to View Loyalty Information</h1>
+        <mat-form-field>
+          <mat-label>Customer Number or Email</mat-label>
+          <input matInput formControlName="searchInput" placeholder="Telephone or Email">
+        </mat-form-field>
+        <div>
+          <button mat-stroked-button matStepperNext color="primary">Search</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Select Customer</ng-template>
+      <form [formGroup]="searchForm">
+        <h1>Select Searched Customer</h1>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef> Surname </th>
+            <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="telephone">
+            <th mat-header-cell *matHeaderCellDef> Telephone </th>
+            <td mat-cell *matCellDef="let element"> {{element.telephone}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef> View Loyalty Progress </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-raised-button style="color: #4DB6AC">View</button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>View Customer Loyalty</ng-template>
+      <h1 class="step3-header">Customer: <strong>Ellen Smith</strong> loyalty portfolio.</h1>
+      <div class="card-container-2">
+        <div class="card-container-x">
+          <mat-spinner mode="determinate" value="80"></mat-spinner>
+          <h2>129</h2>
+          <h4>Days Until Next Voucher</h4>
+        </div>
+        <div class="card-container-y">
+          <mat-icon>emoji_events</mat-icon>
+          <h2>R 291.95</h2>
+          <h4>Total Spent: R 5839</h4>
+        </div>
+        <div class="card-container-z">
+          <mat-accordion>
+            <mat-expansion-panel class="inactive-panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Voucher: <span> EQC12441</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="inactive-panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Voucher: <span> EQC14376</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <hr>
+              <p>Status: <span class="info-span">Inactive</span></p>
+              <p>Expiry Date: <span class="info-span">01-07-2021</span></p>
+              <p>Amount: <span class="info-span">R291</span></p>
+              <p>Amount Redeemed: <span class="info-span">R121</span></p>
+              <p>Instances: <span class="info-span">2</span></p>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="inactive-panel">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Voucher: <span> AC221391</span>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>This is the primary content of the panel.</p>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

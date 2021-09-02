@@ -1,0 +1,221 @@
+<div class="center-container">
+  <app-admin-navigation></app-admin-navigation>
+  <span class="page-title">Update Training Module</span>
+  <div class="admin-form-container">
+    <div class="form-content-wrapper">
+      <mat-horizontal-stepper linear #stepper class="create-training-module-stepper">
+        <mat-step [stepControl]="createForm" [editable]="isEditable">
+          <form [formGroup]="createForm">
+            <ng-template matStepLabel>Update Training Module Configuration</ng-template>
+            <div class="new-branch-form-container">
+              <mat-form-field>
+                <mat-label>Module Name</mat-label>
+                <input matInput formControlName="moduleName">
+                <mat-hint>Enter the New Module's Name</mat-hint>
+                <mat-error>Please enter a module name</mat-error>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Module Type</mat-label>
+                <mat-select matNativeControl formControlName="moduleType" >
+                  <mat-option value="Orientation">Orientation</mat-option>
+                  <mat-option value="Food">Food</mat-option>
+                  <mat-option value="Workplace">Workplace</mat-option>
+                  <mat-option value="Health and Safety">Health and Safety</mat-option>
+                  <mat-option value="Kitchen Rules">Kitchen Rules</mat-option>
+                </mat-select>
+                <mat-hint>Select a Module Type</mat-hint>
+                <mat-error>Please select a module type</mat-error>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Module Language</mat-label>
+                <mat-select matNativeControl formControlName="moduleLanguage" >
+                  <mat-option value="English">English</mat-option>
+                  <mat-option value="Afrikaans">Afrikaans</mat-option>
+                  <mat-option value="Zulu">Zulu</mat-option>
+                  <mat-option value="Xhosa">Xhosa</mat-option>
+                </mat-select>
+                <mat-hint>Select a Module Language</mat-hint>
+                <mat-error>Please select a module language</mat-error>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Module Duration</mat-label>
+                <mat-select matNativeControl formControlName="moduleDuration" >
+                  <mat-option value="5">5</mat-option>
+                  <mat-option value="10">10</mat-option>
+                  <mat-option value="15">15</mat-option>
+                  <mat-option value="20">20</mat-option>
+                  <mat-option value="25">25</mat-option>
+                  <mat-option value="30">30</mat-option>
+                  <mat-option value="35">35</mat-option>
+                  <mat-option value="40">40</mat-option>
+                  <mat-option value="45">45</mat-option>
+                  <mat-option value="50">50</mat-option>
+                  <mat-option value="55">55</mat-option>
+                  <mat-option value="60">60</mat-option>
+                </mat-select>
+                <mat-hint>Select an Estimated Module Duration (Minutes)</mat-hint>
+                <mat-error>Please select an estimated module duration</mat-error>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Employee Designation</mat-label>
+                <mat-select matNativeControl formControlName="employeeDesignation" >
+                  <mat-option value="All">All</mat-option>
+                  <mat-option value="Cashier">Cashier</mat-option>
+                  <mat-option value="Chef">Chef</mat-option>
+                  <mat-option value="Porter">Porter</mat-option>
+                </mat-select>
+                <mat-hint>Select the Employee Type who will Have Access to this Module</mat-hint>
+                <mat-error>Please select an estimated module duration</mat-error>
+              </mat-form-field>
+              <br>
+              <mat-form-field [style.fontSize]="">
+                <mat-label>Module Description</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5" formControlName="moduleDescription"></textarea>
+                <mat-hint>Enter a Module Description</mat-hint>
+                <mat-error>Please enter a module description</mat-error>
+              </mat-form-field>
+              <br>
+            </div>
+            <section class="content-section">
+              <mat-label>Select the Content Type to be Included:</mat-label>
+              <mat-checkbox class="content-margin" [checked]="true" >Video</mat-checkbox>
+              <mat-checkbox class="content-margin" [checked]="true" >Text</mat-checkbox>
+              <mat-checkbox class="content-margin" [checked]="true" >Image</mat-checkbox>
+            </section>
+            <button mat-stroked-button matStepperNext color="primary" [disabled]="!createForm.valid">Next</button>
+            <button mat-raised-button color="primary" [disabled]="!createForm.valid" style="color: white;">Enable Updates</button>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="createForm" [editable]="isEditable">
+          <form [formGroup]="createContentForm">
+            <ng-template matStepLabel>Update Training Module Content</ng-template>
+            <div class="new-branch-form-container-2">
+              <div class="example-container">
+                <h2>Content Order</h2>
+                <p class="order-instruction-label">Please select the order in which you would like the content to be
+                  displayed:</p>
+                <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+                  <div class="example-box" *ngFor="let item of Content" cdkDrag>{{item}}</div>
+                </div>
+                <hr>
+                <h2>Add Video Content URL</h2>
+                <p class="order-instruction-label">Please enter the Youtube URL of the video:</p>
+                <mat-form-field>
+                  <mat-label>Video URL</mat-label>
+                  <input matInput formControlName="videoUrl">
+                  <mat-hint>Enter the Youtube URL of the Video</mat-hint>
+                  <mat-error>Please enter a URL</mat-error>
+                </mat-form-field>
+                <hr>
+                <h2>Add Text Content</h2>
+                <p class="order-instruction-label">Add the text content to be used in the module:</p>
+                <editor apiKey="opzrwvq9h9ygsak1k28bqeysq6x17taa2u46xxeilmm5ngac" [init]="{
+                  icons: 'material',
+                  skin: 'borderless',
+                  plugins: 'wordcount',
+                  menubar: true,
+                  min_height: 150
+                }"
+                ></editor>
+                <br>
+                <mat-label style="color: red; margin-top: 5%">Please Add Text Content</mat-label>
+                <hr>
+                <h2>Upload Images</h2>
+                <p class="order-instruction-label">Please upload up to 6 images and add an optional footer:</p>
+                <div class="image-upload-container">
+                  <mat-grid-list cols="3" rowHeight="2:1">
+                    <mat-grid-tile>
+                      <div class="tile-div">
+                        <button mat-raised-button color="primary" >Upload</button>
+                      <br>
+                      <mat-form-field>
+                        <mat-label>Image Footer</mat-label>
+                        <input matInput value="" readonly>
+                        <mat-hint>Enter an Image Title or Footer Text</mat-hint>
+                      </mat-form-field>
+                      </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <div class="tile-div">
+                        <button mat-raised-button color="primary">Upload</button>
+                      <br>
+                      <mat-form-field>
+                        <mat-label>Image Footer</mat-label>
+                        <input matInput value="" readonly>
+                        <mat-hint>Enter an Image Title or Footer Text</mat-hint>
+                      </mat-form-field>
+                      </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <div class="tile-div">
+                        <button mat-raised-button color="primary" >Upload</button>
+                      <br>
+                      <mat-form-field>
+                        <mat-label>Image Footer</mat-label>
+                        <input matInput>
+                        <mat-hint>Enter an Image Title or Footer Text</mat-hint>
+                      </mat-form-field>
+                      </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <div class="tile-div">
+                        <button mat-raised-button color="primary" >Upload</button>
+                      <br>
+                      <mat-form-field>
+                        <mat-label>Image Footer</mat-label>
+                        <input matInput>
+                        <mat-hint>Enter an Image Title or Footer Text</mat-hint>
+                      </mat-form-field>
+                      </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <div class="tile-div">
+                        <button mat-raised-button color="primary">Upload</button>
+                      <br>
+                      <mat-form-field>
+                        <mat-label>Image Footer</mat-label>
+                        <input matInput>
+                        <mat-hint>Enter an Image Title or Footer Text</mat-hint>
+                      </mat-form-field>
+                      </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <div class="tile-div">
+                        <button mat-raised-button color="primary" >Upload</button>
+                      <br>
+                      <mat-form-field>
+                        <mat-label>Image Footer</mat-label>
+                        <input matInput>
+                        <mat-hint>Enter an Image Title or Footer Text</mat-hint>
+                      </mat-form-field>
+                      </div>
+                    </mat-grid-tile>
+                  </mat-grid-list>
+                  <br>
+                <mat-label style="color: red; margin-top: 5%">Please Upload At least One Image</mat-label>
+                </div>
+              </div>
+            </div>
+            <button mat-stroked-button matStepperNext color="primary" [disabled]="!createForm.valid">Next</button>
+            <button mat-raised-button color="primary" [disabled]="!createForm.valid" style="color: white;">Enable Updates</button>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="createForm" [editable]="isEditable">
+          <ng-template matStepLabel>Training Module Update Confirmation</ng-template>
+          <div class="stepper-content-container">
+            <h1>Training Module: <strong>Sanatizing Your Workspace</strong>, has had updates made to it.</h1>
+            <p style="margin-left: 1.6%;">Would you like to re-publish this training module with its new updates?</p>
+            <button mat-stroked-button matStepperNext color="primary">Publish</button>
+            <br>
+            <button mat-stroked-button matStepperNext style="background-color: #CD1775; color: white;">Delete</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>
